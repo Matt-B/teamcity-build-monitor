@@ -1,0 +1,12 @@
+{
+  "name": "teamcity-build-monitor",
+  "version": "0.0.1",
+  "description": "A simple build monitor for Teamcity",
+  "main": "app.js",
+  "dependencies": {
+    "express": "*",
+    "jade": "*",
+    "request": "*",
+    "cheerio": "*"
+  }
+}
