@@ -2,7 +2,10 @@ var request = require('request');
 var cheerio = require('cheerio');
 var express = require('express')
 var app = express()
-var teamcityUrl = process.env.TEAMCITY_HOST
+var teamcityUrl = process.env.TEAMCITY_HOST;
+var filterString = process.env.TEAMCITY_PROJECT_FILTER; 
+
+console.log(filterString);
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -10,16 +13,27 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
   getBuildInformation(function(builds) {
-    filterBuildsByProjectTitle(builds, 'Content Disco', function(contentDiscoBuilds) {      
-      filterBuildsByState(contentDiscoBuilds, 'failing', function(failingBuilds) {
-        filterBuildsByState(contentDiscoBuilds, 'investigate', function(investigatingBuilds) {
+    if(filterString) {
+      filterBuildsByProjectTitle(builds, filterString, function(contentDiscoBuilds) {      
+        filterBuildsByState(contentDiscoBuilds, 'failing', function(failingBuilds) {
+          filterBuildsByState(contentDiscoBuilds, 'investigate', function(investigatingBuilds) {
+            res.render('index', {
+              failingBuilds: failingBuilds,
+              investigatingBuilds: investigatingBuilds
+            });
+          });
+        });
+      });
+    } else {
+      filterBuildsByState(builds, 'failing', function(failingBuilds) {
+        filterBuildsByState(builds, 'investigate', function(investigatingBuilds) {
           res.render('index', {
             failingBuilds: failingBuilds,
             investigatingBuilds: investigatingBuilds
           });
         });
       });
-    });
+    }
   });
 })
 
