@@ -3,16 +3,17 @@ html
   head
     title TeamCity Build Monitor
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css")
-  body
+    link(rel="stylesheet" href="/stylesheets/main.css")
+  body(style="background-color=#000080")
     .container-fluid
       br
       if failingBuilds.length || investigatingBuilds.length
         each val in failingBuilds
-          div.jumbotron(style="background-color:#ff0000")
+          div.jumbotron.failingBuild
             h1
               |#{val.project} - #{val.name}
         each val in investigatingBuilds
-          div.jumbotron(style="background-color:#ffa500")
+          div.jumbotron.investigatingBuild
             h1
               |#{val.project} - #{val.name}
       else

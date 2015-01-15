@@ -1,0 +1,19 @@
+body {
+  background-color:#0066FF;
+}
+
+.failingBuild {
+  background-color:#ff0000;
+}
+
+.failingBuild h1 {
+  color:#FFFFFF;
+}
+
+.investigatingBuild {
+  background-color:#ffa500;
+}
+
+.investigatingBuild h1 {
+  color: #FFFFFF;
+}
