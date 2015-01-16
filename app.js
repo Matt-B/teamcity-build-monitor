@@ -14,9 +14,9 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
   getBuildInformation(function(builds) {
     if(filterString) {
-      filterBuildsByProjectTitle(builds, filterString, function(contentDiscoBuilds) {      
-        filterBuildsByState(contentDiscoBuilds, 'failing', function(failingBuilds) {
-          filterBuildsByState(contentDiscoBuilds, 'investigate', function(investigatingBuilds) {
+      filterBuildsByProjectTitle(builds, filterString, function(filteredBuilds) {      
+        filterBuildsByState(filteredBuilds, 'failing', function(failingBuilds) {
+          filterBuildsByState(filteredBuilds, 'investigate', function(investigatingBuilds) {
             res.render('index', {
               failingBuilds: failingBuilds,
               investigatingBuilds: investigatingBuilds
