@@ -2,6 +2,8 @@
 
 A simple build monitor for TeamCity, which shows failing builds and those under investigation.
 
+Designed to be as light as possible so it can be run and displayed in a browser on a Raspberry Pi (specifically a Model B).
+
 ## Getting started
 
 Clone the repository and install the dependencies:
