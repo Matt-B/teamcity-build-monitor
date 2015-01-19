@@ -1,19 +1,31 @@
 body {
-  background-color:#000000;
+  background-color: #000000;
 }
 
 .failingBuild {
-  background-color:#ff0000;
+  background-color: #ff0000;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .failingBuild h1 {
-  color:#FFFFFF;
+  color: #FFFFFF;
+  font-weight: bold;
 }
 
 .investigatingBuild {
-  background-color:#ffa500;
+  background-color: #ffa500;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .investigatingBuild h1 {
   color: #FFFFFF;
+  font-weight: bold;
+}
+
+.success {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

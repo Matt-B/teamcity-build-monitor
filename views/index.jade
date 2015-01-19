@@ -2,21 +2,21 @@ doctype
 html
   head
     title TeamCity Build Monitor
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css")
     link(rel="stylesheet" href="/stylesheets/main.css")
     meta(http-equiv="refresh" content="60")
   body(style="background-color=#000080")
-    .container-fluid
       br
       if failingBuilds.length || investigatingBuilds.length
         each val in failingBuilds
-          div.jumbotron.failingBuild
+          div.failingBuild
             h1
               |#{val.project} - #{val.name}
+          br
         each val in investigatingBuilds
-          div.jumbotron.investigatingBuild
+          div.investigatingBuild
             h1
               |#{val.project} - #{val.name}
+          br
       else
-        div.row.text-center
-          img(src="https://33.media.tumblr.com/f492fdcdb965ca14835d52dd5dfc4d42/tumblr_mltj1qIsoy1rmv1vao1_400.gif")
+        div
+          img.success(src="https://33.media.tumblr.com/f492fdcdb965ca14835d52dd5dfc4d42/tumblr_mltj1qIsoy1rmv1vao1_400.gif")
