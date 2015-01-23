@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var moment = require('moment');
 var teamcity = require('./lib/teamcity');
 var app = express();
 var filterString = process.env.TEAMCITY_PROJECT_FILTER; 
@@ -12,6 +13,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
   teamcity.getBuilds(function(builds) {
     teamcity.filterAndSortBuildsByState(builds, filterString, function(sortedAndFilteredBuilds) {
+      sortedAndFilteredBuilds.time = moment().format("h:mm a");
       res.render('index', sortedAndFilteredBuilds);
     });
   });
