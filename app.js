@@ -11,11 +11,19 @@ app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-  teamcity.getBuilds(function(builds) {
-    teamcity.filterAndSortBuildsByState(builds, filterString, function(sortedAndFilteredBuilds) {
-      sortedAndFilteredBuilds.time = moment().format("h:mm a");
-      res.render('index', sortedAndFilteredBuilds);
-    });
+  teamcity.getBuilds(function(builds, error) {
+    if(!error) {
+      teamcity.filterAndSortBuildsByState(builds, filterString, function(sortedAndFilteredBuilds) {
+        sortedAndFilteredBuilds.time = moment().format('h:mm a');
+        res.render('index', sortedAndFilteredBuilds);
+      });
+    } else {
+      console.log('Error: ' + error);
+      res.render('error', {
+        error: error,
+        time: moment().format('h:mm a')
+      });
+    }
   });
 });
 
